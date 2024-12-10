@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=5" name="viewport"/>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+    <title>BETATEST KAWAN BY GUEE</title>
+    <link rel="icon" type="image/x-icon" href="https://malasid.github.io/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+    <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
+    <script src="https://kit.fontawesome.com/4f3ce16e3e.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fbe4e4;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #bodyblur {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://feeldreams.github.io/pics/awan.jpg'); /* Ganti URL ini sesuai gambar latar belakang yang kamu inginkan */
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        #Content {
+            text-align: center;
+            opacity: 0;
+            margin-top: 10vh;
+            animation: fadeIn 2s ease-out forwards;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        #emojiIntro {
+            font-size: 120px;
+            animation: bounceIn 1s infinite;
+            cursor: pointer;
+            color: #ff0066;
+            z-index: 10; /* Menambahkan z-index agar bisa diklik */
+        }
+
+        #loveIn {
+            font-size: 80px;
+            cursor: pointer;
+            animation: bounce 1s infinite;
+            margin-top: 20px;
+            color: #ff0066;
+            z-index: 10; /* Menambahkan z-index agar bisa diklik */
+        }
+
+        #ket {
+            font-size: 20px;
+            color: #ff6f61;
+            margin-top: 20px;
+            animation: slideUp 1s ease-out 1s;
+        }
+
+        .question-container {
+            display: none;
+            margin-top: 30px;
+            animation: fadeInUp 2s ease-out 1.5s;
+        }
+
+        .question {
+            font-size: 18px;
+            margin: 15px 0;
+            color: #2d3e50;
+        }
+
+        input, button {
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #ff6f61;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff4c39;
+        }
+
+        #kirimButton {
+            display: none;
+        }
+
+        #hasil {
+            font-size: 24px;
+            color: #3498db;
+            margin-top: 20px;
+            font-weight: bold;
+            display: none;
+        }
+
+        #horee {
+            font-size: 50px;
+            color: #ffeb3b;
+            display: none;
+            animation: hooray 1s ease-in-out;
+        }
+
+        #jawaban {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2d3e50;
+        }
+
+        #ssRequest {
+            font-size: 18px;
+            color: #f39c12;
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateY(30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes hooray {
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bodyblur"></div>
+
+    <div id="Content">
+        <!-- Emoji Intro Animation -->
+        <div id="emojiIntro" onclick="showQuestions()">MULAI ?</div>
+
+        <p id="ket">Ketuk  untuk melanjutkan...</p>
+
+        <!-- Love Button -->
+        <div id="loveIn" onclick="showQuestions()">🗿</div>
+
+        <!-- Questions Form -->
+        <div class="question-container" id="questionContainer">
+            <div class="question">
+                <label for="nama">1. Nama kamu siapa ?</label><br>
+                <input type="text" id="nama" placeholder="Nama Panjang Kamu">
+            </div>
+            <div class="question">
+                <label for="tglLahir">2. Kapan tanggal lahir kamu?</label><br>
+                <input type="date" id="tglLahir" placeholder="Masukan Tanggal Lahir Mu">
+            </div>
+            <div class="question">
+                <label for="hobi">3. Hobi kamu apa?</label><br>
+                <input type="text" id="hobi" placeholder="Contoh: Mendengarkan Musik">
+            </div>
+            <div class="question">
+                <label for="warnaFavorit">4. Warna favorit kamu apa?</label><br>
+                <input type="text" id="warnaFavorit" placeholder="Contoh: Pink">
+            </div>
+            <div class="question">
+                <label for="seberapaSayang">5. Seberapa sayang kamu sama teman deket?</label><br>
+                <input type="text" id="seberapaSayang" placeholder="Tuliskan Dengan Kata-Kata Manis">
+            </div>
+            <div class="question">
+                <label for="kenanganFavorit">6. Apa yang kamu inginkan?</label><br>
+                <input type="text" id="kenanganFavorit" placeholder="Contoh: Sesuai hati">
+            </div>
+            <div class="question">
+                <label for="impian">7. Apa pesan pesan kamu buat teman dekat?</label><br>
+                <input type="text" id="impian" placeholder="Contoh: Sesuai hati">
+            </div>
+
+            <button id="kirimButton" onclick="tampilkanHoree()">Kirim</button>
+        </div>
+
+        <!-- Horee Makasih Animation -->
+        <div id="hasil">Terima kasih sudah mengisi form gakjelas ini</div>
+        <div id="horee">🎉 Horee ! Makasih Breee 🎉</div>
+
+        <!-- Format Jawaban -->
+        <div id="jawaban"></div>
+
+        <!-- Permintaan Screenshot -->
+        <div id="ssRequest">Mohon SS (screenshot) jawaban ini dan kirim ke temen dekat atau sapa kek, terimakasih! </div>
+    </div>
+
+    <!-- Audio for calm background music -->
+    <audio id="halHebatAudio" src="https://feeldreams.github.io/audio/nightchanges.mp3" preload="auto" loop></audio>
+
+    <script>
+        // Fungsi untuk menampilkan pertanyaan setelah LOVE diklik
+        function showQuestions() {
+            // Play audio when LOVE button is clicked
+            var audio = document.getElementById("halHebatAudio");
+            audio.play();
+
+            // Tampilkan notifikasi dengan SweetAlert
+            Swal.fire({
+                title: 'Mohon Di Jawab Dengan Jujur !',
+                text: 'Anggap Ini Ulangan.BoongDosa',
+                icon: 'warning',
+                confirmButtonText: 'Oke, Siap Ketua!',
+                backdrop: true
+            }).then(() => {
+                // Setelah notifikasi, tampilkan pertanyaan
+                document.getElementById("emojiIntro").style.display = "none";
+                document.getElementById("loveIn").style.display = "none";
+                document.getElementById("ket").style.display = "none";
+                document.getElementById("questionContainer").style.display = "block";
+                document.getElementById("kirimButton").style.display = "block";
+            });
+        }
+
+        // Fungsi untuk menampilkan hasil jawaban dan animasi Horee
+        function tampilkanHoree() {
+            const nama = document.getElementById("nama").value;
+            const tglLahir = document.getElementById("tglLahir").value;
+            const hobi = document.getElementById("hobi").value;
+            const warnaFavorit = document.getElementById("warnaFavorit").value;
+            const seberapaSayang = document.getElementById("seberapaSayang").value;
+            const kenanganFavorit = document.getElementById("kenanganFavorit").value;
+            const impian = document.getElementById("impian").value;
+
+            if (nama && tglLahir && hobi && warnaFavorit && seberapaSayang && kenanganFavorit && impian) {
+                // Menampilkan hasil jawaban
+                document.getElementById("jawaban").innerHTML = `
+                    <h3>Jawabanmu:</h3>
+                    <ul>
+                        <li><strong>Nama:</strong> ${nama}</li>
+                        <li><strong>Tanggal Lahir:</strong> ${tglLahir}</li>
+                        <li><strong>Hobi:</strong> ${hobi}</li>
+                        <li><strong>Warna Favorit:</strong> ${warnaFavorit}</li>
+                        <li><strong>Seberapa Sayang:</strong> ${seberapaSayang}</li>
+                        <li><strong>Kenangan Favorit:</strong> ${kenanganFavorit}</li>
+                        <li><strong>Impian Bersama:</strong> ${impian}</li>
+                    </ul>
+                `;
+                // Tampilkan animasi Horee dan notifikasi
+                document.getElementById("hasil").style.display = "block";
+                document.getElementById("horee").style.display = "block";
+                document.getElementById("ssRequest").style.display = "block";
+
+                // Menampilkan notifikasi SweetAlert
+                Swal.fire({
+                    title: 'Terimakasih Udh Jawab !',
+                    text: 'Jawabanmu sudah diterima. Kamu luar biasa!',
+                    icon: 'success',
+                    confirmButtonText: 'Oke, Sama Sama!',
+                    backdrop: true
+                });
+            } else {
+                Swal.fire('Oops!', 'Semua pertanyaan harus diisi ya!', 'warning');
+            }
+        }
+    </script>
+</body>
+</html>
